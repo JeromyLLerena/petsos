@@ -52,6 +52,7 @@ $app->group(['prefix' => 'api', 'namespace' => 'Api'], function() use ($app){
 		$app->group(['prefix' => 'posts', 'namespace' => 'Post', 'middleware' => 'jwt.auth'], function() use ($app){
 			$app->get('/', ['uses' => 'PostController@all']);
 			$app->post('/', ['uses' => 'PostController@create']);
+			$app->get('/me', ['uses' => 'PostController@getUserPosts']);
 		});
 	});
 });

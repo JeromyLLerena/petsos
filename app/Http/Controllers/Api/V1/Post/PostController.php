@@ -6,23 +6,35 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Repositories\PostRepository;
+use App\Repositories\UserRepository;
 
 class PostController extends Controller
 {
 	protected $post_repository;
+	protected $user_repository;
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
-	public function __construct(PostRepository $post_repository)
+	public function __construct(PostRepository $post_repository, UserRepository $user_repository)
 	{
 		$this->post_repository = $post_repository;
+		$this->user_repository = $user_repository;
 	}
 
 	public function all()
 	{
-		return response()->json($this->post_repository->all(), 200);
+		return response()->json(['success' => $this->post_repository->all()], 200);
+	}
+
+	public function getUserPosts(Request $request)
+	{
+		$current_user = $request->user();
+
+		$posts = $this->user_repository->getUserPosts($current_user->id);
+
+		return response()->json(['success' => $posts], 200);
 	}
 
 	public function create(Request $request)

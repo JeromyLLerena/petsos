@@ -31,4 +31,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
 	protected $hidden = [
 		'password',
 	];
+
+	public function posts()
+	{
+		return $this->hasMany('App\Models\Post', 'user_id', 'id');
+	}
 }
