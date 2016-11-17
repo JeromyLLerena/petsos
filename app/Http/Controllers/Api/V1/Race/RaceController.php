@@ -21,6 +21,6 @@ class RaceController extends Controller
 
 	public function all()
 	{
-		return response()->json(['success' => $this->race_repository->all()], 200);
+		return response()->json(['success' => ['races' => $this->race_repository->all()]], 200);
 	}
 }

@@ -21,6 +21,6 @@ class PostTypeController extends Controller
 
 	public function all()
 	{
-		return response()->json(['success' => $this->post_type_repository->all()], 200);
+		return response()->json(['success' => ['post_types' = >$this->post_type_repository->all()]], 200);
 	}
 }

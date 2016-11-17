@@ -54,6 +54,12 @@ $app->group(['prefix' => 'api', 'namespace' => 'Api'], function() use ($app){
 			$app->post('/', ['uses' => 'PostController@create']);
 			$app->get('/me', ['uses' => 'PostController@getUserPosts']);
 		});
+
+		$app->group(['prefix' => 'messages', 'namespace' => 'Message', 'middleware' => 'jwt.auth'], function() use ($app){
+			$app->post('/', ['uses' => 'MessageController@sendMessage']);
+			$app->get('/{another_user_id}', ['uses' => 'MessageController@getConversation']);
+			$app->get('/', ['uses' => 'MessageController@getLastestMessages']);
+		});
 	});
 });
 

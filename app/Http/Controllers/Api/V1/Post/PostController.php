@@ -25,7 +25,7 @@ class PostController extends Controller
 
 	public function all()
 	{
-		return response()->json(['success' => $this->post_repository->all()], 200);
+		return response()->json(['success' => ['posts' => $this->post_repository->all()]], 200);
 	}
 
 	public function getUserPosts(Request $request)
@@ -34,7 +34,7 @@ class PostController extends Controller
 
 		$posts = $this->user_repository->getUserPosts($current_user->id);
 
-		return response()->json(['success' => $posts], 200);
+		return response()->json(['success' => ['posts' => $posts]], 200);
 	}
 
 	public function create(Request $request)
@@ -43,7 +43,7 @@ class PostController extends Controller
 
 		$validator = Validator::make($request->all(), [
 			'description' => ['required'],
-			'post_type' => ['numeric']
+			'post_type' => ['required','numeric']
 		]);
 
 		if ($validator->fails()) {

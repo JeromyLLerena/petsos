@@ -21,6 +21,6 @@ class UserTypeController extends Controller
 
 	public function all()
 	{
-		return response()->json(['success' => $this->user_type_repository->all()], 200);
+		return response()->json(['success' => ['user_types' => $this->user_type_repository->all()]], 200);
 	}
 }

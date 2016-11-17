@@ -21,6 +21,6 @@ class DistrictController extends Controller
 
 	public function all()
 	{
-		return response()->json(['success' => $this->district_repository->all()], 200);
+		return response()->json(['success' => ['districts' => $this->district_repository->all()]], 200);
 	}
 }

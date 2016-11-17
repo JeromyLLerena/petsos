@@ -21,6 +21,6 @@ class AnimalController extends Controller
 
 	public function all()
 	{
-		return response()->json(['success' => $this->animal_repository->all()], 200);
+		return response()->json(['success' => ['animals' => $this->animal_repository->all()]], 200);
 	}
 }
